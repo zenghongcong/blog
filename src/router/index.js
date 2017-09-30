@@ -5,7 +5,6 @@ import Article from '@/components/Article'
 import Archives from '@/components/Archives'
 import Categories from '@/components/Categories'
 import About from '@/components/About'
-import Search from '@/components/Search'
 
 Vue.use(Router)
 
@@ -35,11 +34,6 @@ export default new Router({
       path: '/about',
       name: 'About',
       component: About
-    },
-    {
-      path: '/search',
-      name: 'Search',
-      component: Search
     }
   ],
   linkActiveClass: 'active'

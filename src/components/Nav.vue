@@ -6,7 +6,6 @@
 			<router-link to="/archives"><i class="fa fa-archive"></i>归档</router-link>
 			<router-link to="/categories"><i class="fa fa-bookmark"></i>分类</router-link>
 			<router-link to="/about"><i class="fa fa-user"></i>关于我</router-link>
-			<router-link to="/search"><i class="fa fa-search"></i>搜索</router-link>
 		</nav>
 	</div>
 </template>
@@ -25,13 +24,11 @@
     height: 64px
     padding: 0 20px
     margin: auto
-    background-color: #3f51b5
-    background-image: linear-gradient(120deg, #155799, #159957)
+    background: #4183c4
     a
       display: inline-block
       line-height: 64px
       color: #fff
-      text-decoration: none
     nav a
       position: relative
       margin-left: 15px
