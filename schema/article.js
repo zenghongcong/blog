@@ -5,23 +5,25 @@ module.exports = function(sequelize, DataTypes) {
     id: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
-      primaryKey: true
+      primaryKey: true,
+      autoIncrement: true
     },
     title: {
       type: DataTypes.STRING(45),
-      allowNull: true
+      allowNull: false
     },
     intro: {
       type: DataTypes.STRING(100),
-      allowNull: true
+      allowNull: false
     },
     content: {
-      type: DataTypes.STRING(1000),
-      allowNull: true
+      type: DataTypes.TEXT,
+      allowNull: false
     },
     create_time: {
-      type: DataTypes.DATE,
-      allowNull: true
+      type: DataTypes.TIME,
+      allowNull: false,
+      defaultValue: sequelize.literal('CURRENT_TIMESTAMP')
     }
   }, {
     tableName: 'article'

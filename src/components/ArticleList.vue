@@ -1,43 +1,13 @@
 <template>
   <div class="article-list fl">
     <ul class="clear">
-      <li>
+      <li v-for="it in list">
         <div class="item">
-        	<h2><a href="#/article/1">文章标题文章标题文章标题文章标题</a></h2>
-	        <p class="intro">文章简介文章简介文章简介文章简介文章简介文章简介文章简介文章简介文章简介文章简介文章简介文章简介文章简介文章简介文章简介文章简介文章简介</p>
+        	<h2><a :href="'#/article/' + it.id">{{it.title}}</a></h2>
+	        <p class="intro">{{it.intro}}</p>
 	      	<div class="tag">
-	      		<span class="date"><i class="fa fa-calendar"></i>2017-09-22</span>
-	      		<a href="#/categories/2"><i class="fa fa-bookmark"></i>分类</a>
-	      	</div>
-        </div>
-      </li>
-      <li>
-        <div class="item">
-        	<h2><a href="#/article/1">文章标题文章标题文章标题文章标题</a></h2>
-	        <p class="intro">文章简介文章简介文章简介文章简介文章简介文章简介文章简介文章简介文章简介文章简介文章简介文章简介文章简介文章简介文章简介文章简介文章简介</p>
-	      	<div class="tag">
-	      		<span class="date"><i class="fa fa-calendar"></i>2017-09-22</span>
-	      		<a href="#/categories/2"><i class="fa fa-bookmark"></i>分类</a>
-	      	</div>
-        </div>
-      </li>
-      <li>
-        <div class="item">
-        	<h2><a href="#/article/1">文章标题文章标题文章标题文章标题</a></h2>
-	        <p class="intro">文章简介文章简介文章简介文章简介文章简介文章简介文章简介文章简介文章简介文章简介文章简介文章简介文章简介文章简介文章简介文章简介文章简介</p>
-	      	<div class="tag">
-	      		<span class="date"><i class="fa fa-calendar"></i>2017-09-22</span>
-	      		<a href="#/categories/2"><i class="fa fa-bookmark"></i>分类</a>
-	      	</div>
-        </div>
-      </li>
-      <li>
-        <div class="item">
-        	<h2><a href="#/article/1">文章标题文章标题文章标题文章标题</a></h2>
-	        <p class="intro">文章简介文章简介文章简介文章简介文章简介文章简介文章简介文章简介文章简介文章简介文章简介文章简介文章简介文章简介文章简介文章简介文章简介</p>
-	      	<div class="tag">
-	      		<span class="date"><i class="fa fa-calendar"></i>2017-09-22</span>
-	      		<a href="#/categories/2"><i class="fa fa-bookmark"></i>分类</a>
+	      		<span class="date"><i class="fa fa-calendar"></i>{{it.create_time | date}}</span>
+	      		<a :href="'#/categories/' + it.cat_id"><i class="fa fa-bookmark"></i>{{it.cat_name}}</a>
 	      	</div>
         </div>
       </li>
@@ -50,8 +20,25 @@ export default {
   name: 'article-list',
   data () {
     return {
-      
+      list: []
     }
+  },
+  created(){
+  	this.getArticleList()
+  },
+  methods: {
+  	getArticleList(){
+  		this.$http.post('/api/article/list')
+  			.then((res) => {
+  				if(res.status == 200){
+  					this.list = res.data.list || [];
+  				}else{
+  					alert('请求失败！')
+  				}
+  			}, (err) => {
+  				console.log(err)
+  			})
+  	}
   }
 }
 </script>

@@ -4,12 +4,24 @@
  * @ desc 文章
  */
 
-const article = require('../models/article.js');
+const articleModel = require('../models/article.js');
 
 const getArticleList = async function(ctx){
+	let result = await articleModel.getArticleList();
+	ctx.body = {
+		msg: 'success',
+		total: result.count,
+		list: result.rows
+	};
+}
+
+const getArticle = async function(ctx){
 	let id = ctx.params.id;
-	let result = await article.findArticle(id);
-	this.body = result;
+	let result = await articleModel.getArticleById(id);
+	ctx.body = {
+		msg: 'success',
+		article: result.rows
+	};
 }
 
 module.exports = {

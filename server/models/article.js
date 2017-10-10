@@ -4,23 +4,34 @@
  * @ desc    文章
  */
 
-const db = require('../config/db.js');
-const articlePath = '../schema/article.js';
-const Blog = db.Blog;
+const Blog = require('../config/db.js').Blog;
+const articleSchema = Blog.import('../schema/article.js');
+const categorySchema = Blog.import('../schema/category.js');
 
-const Article = Blog.import(articlePath);
+// article表关联模型
+articleSchema.hasOne(categorySchema, {
+    foreignKey: 'id',
+    constraints: true
+});
 
-const findArticle = async function(id){
-	console.log(id)
-	let result = await Article.findAll({
+const getArticleById = async function(id){
+	let result = await articleSchema.findOne({
 		where: {
 	      id: id
-	    }
+	   	}
 	});
+	
 	return result;
 };
 
+const getArticleList = async function(){
+	return await articleSchema.findAndCount({
+		include: [categorySchema]
+	});
+}
+
 module.exports = {
-	findArticle
+	getArticleById,
+	getArticleList
 };
 

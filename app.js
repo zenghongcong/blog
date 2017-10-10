@@ -4,33 +4,33 @@
  * @ desc    启动文件
  */
 
-const app = new (require('koa'))(),
-	  rout = require('koa-router')(),
-	  json = require('koa-json')(),
-	  logger = require('koa-logger'),
-	  api = require('./server/routes/api.js'),
-	  bodyparser = require('koa-bodyparser')();
-	  
-app.use(bodyparser);
-app.use(json);
-app.use(logger);
+const path = require('path'),
+	koa = new (require('koa'))(),
+	koaRouter = require('koa-router')(),
+	logger = require('koa-logger'),
+  	article = require('./server/routes/api.js');
 
-app.use(async (ctx, next) => {
-	let start = new Date;
-	await next();
-	let ms = new Date - start;
-	console.log('%s %s - %s', ctx.method, ctx.url, ms);
+koa.use(require('koa-bodyparser')());
+koa.use(logger());
+
+koa.use(async (ctx, next) => {
+	let start = new Date();
+  	await next();
+  	let ms = new Date - start;
+  	console.log('%s %s - %s', ctx.method, ctx.url, ms);
 });
 
-app.on('error', (err, ctx) => {
-	console.log('server error', err);
+koa.on('error', function(err, ctx) {
+  	console.log('server error: ', err);
 });
 
-rout.use('/api', api.routes());
-app.use(rout.routes());
+// 挂载到 koa-router 上，同时会让所有的 article 的请求路径前面加上 '/api' 。
+koaRouter.use('/api', article.routes());
 
-app.listen(8889, () => {
-	console.log('Koa is listening in 8889');
+koa.use(koaRouter.routes()); // 将路由规则挂载到Koa上。
+
+koa.listen(8889, () => {
+  console.log('Koa is listening on port 8889');
 });
 
-module.exports = app;
+module.exports = koa;
