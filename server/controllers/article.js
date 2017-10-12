@@ -7,7 +7,10 @@
 const articleModel = require('../models/article.js');
 
 const getArticleList = async function(ctx){
-	let result = await articleModel.getArticleList();
+	let postData = ctx.request.body;
+	let limit = postData.size;
+	let offset = (postData.page - 1) * limit;
+	let result = await articleModel.getArticleList(limit, offset);
 	ctx.body = {
 		msg: 'success',
 		total: result.count,
@@ -16,14 +19,16 @@ const getArticleList = async function(ctx){
 }
 
 const getArticle = async function(ctx){
-	let id = ctx.params.id;
+	let id = ctx.request.body.id;
 	let result = await articleModel.getArticleById(id);
+	ctx.body = result
 	ctx.body = {
 		msg: 'success',
-		article: result.rows
+		article: result
 	};
 }
 
 module.exports = {
-	getArticleList
+	getArticleList,
+	getArticle
 };

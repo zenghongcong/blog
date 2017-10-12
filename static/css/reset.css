@@ -30,12 +30,10 @@ body {
     line-height: 1.5;
 }
 
-:focus {
-	outline: 1;
-}
+:focus{ outline: none; }
 
 article,aside,canvas,details,figcaption,figure,
-footer,header,hgroup,menu,nav,section,summary { 
+footer,header,hgroup,menu,nav,section,summary {
     display: block;
 }
 

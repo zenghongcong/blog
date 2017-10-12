@@ -1,6 +1,6 @@
 /**
  * @ author  zenghongcong
- * @ date    2017-9-27 20:18
+ * @ date    2017-10-12 14:58
  * @ desc    文章
  */
 
@@ -18,23 +18,21 @@ categorySchema.hasMany(articleSchema, {
 	constraints: false
 })
 
-const getArticleById = async function(id){
-	return await articleSchema.findById(id, {
-		include: [categorySchema]
+const getCategoryById = async function(id){
+	return await categorySchema.findById(id, {
+		include: [articleSchema]
 	});
 };
 
-const getArticleList = async function(limit, offset){
-	return await articleSchema.findAndCount({
-		order: [['create_time', 'desc']],
-		limit: limit,
-		offset: offset,
-		include: [categorySchema]
+const getCategoryList = async function(){
+	return await categorySchema.findAndCount({
+		order: ['id'],
+		include: [articleSchema]
 	});
 }
 
 module.exports = {
-	getArticleById,
-	getArticleList
+	getCategoryById,
+	getCategoryList
 };
 

@@ -31,6 +31,11 @@ export default new Router({
       component: Categories
     },
     {
+      path: '/categories/:id',
+      name: 'Category',
+      component: Categories
+    },
+    {
       path: '/about',
       name: 'About',
       component: About

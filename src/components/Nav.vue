@@ -3,7 +3,7 @@
 		<a href="/">blog</a>
 		<nav class="fr">
 			<router-link to="/article"><i class="fa fa-home"></i>首页</router-link>
-			<router-link to="/archives"><i class="fa fa-archive"></i>归档</router-link>
+			<!--<router-link to="/archives"><i class="fa fa-archive"></i>归档</router-link>-->
 			<router-link to="/categories"><i class="fa fa-bookmark"></i>分类</router-link>
 			<router-link to="/about"><i class="fa fa-user"></i>关于我</router-link>
 		</nav>
@@ -18,6 +18,7 @@
   .nav
     display: table
     position: fixed
+    z-index: 11
     left: 0
     top: 0
     width: 100%

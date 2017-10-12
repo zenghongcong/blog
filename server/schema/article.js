@@ -20,17 +20,13 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.TEXT,
       allowNull: false
     },
+    cat_id: {
+      type: DataTypes.INTEGER(11),
+      allowNull: false
+    },
     create_time: {
       type: DataTypes.DATE,
       allowNull: false
-    },
-    cat_id: {
-      type: DataTypes.INTEGER(11),
-      allowNull: false,
-      references: {
-        model: 'category',
-        key: 'id'
-      }
     }
   }, {
     tableName: 'article'
