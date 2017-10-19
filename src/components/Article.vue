@@ -8,7 +8,7 @@
 	      <span class="read"><i class="fa fa-flag"></i>阅读数 <i>6231</i></span>
 	    </div>
     </div>
-    <div class="content" v-html="toHtml(article.content)"></div>
+    <div class="content" v-html="article.content"></div>
   </div>
 </template>
 
